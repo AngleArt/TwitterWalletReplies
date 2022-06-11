@@ -1,4 +1,6 @@
-﻿namespace TwitterWalletReplies.Domain
+﻿using System.Text.RegularExpressions;
+
+namespace TwitterWalletReplies.Domain
 {
     public class Tweet
     {
@@ -9,6 +11,21 @@
         {
             this.Username = username;
             this.Text = text;
+        }
+
+        public string ScrapeWalletAddress()
+        {
+            string rgPattern = @"([a-zA-Z0-9_-]+(\.loopring)?(\.eth+))|(0x[a-fA-F0-9]{40})";
+
+            Regex rg = new Regex(rgPattern);
+            MatchCollection matches = rg.Matches(this.Text);
+
+            if (matches.Count() > 0)
+            {
+                return matches[0].Value;
+            }
+
+            return null;
         }
     }
 }

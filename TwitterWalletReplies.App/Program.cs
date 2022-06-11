@@ -6,19 +6,19 @@ namespace TwitterWalletReplies.App
     class Program
     {
         private static IConfigurationRoot _config;
-        private static TwitterApiService _apiService;
+        private static ITwitterApiService _apiService;
         private static string _bearerToken;
 
         static void Main(string[] args)
         {
             try
             {
-                long twitId = InputHelper.GetTwitId(args);
+                long TweetId = InputHelper.GetTweetId(args);
 
                 StartConfig();
                 StartServices();
 
-                Console.WriteLine($"Press enter to process the replies for '{twitId}'...");
+                Console.WriteLine($"Press enter to process the replies for '{TweetId}'...");
             }
             catch (ArgumentException ex)
             {
@@ -51,8 +51,6 @@ namespace TwitterWalletReplies.App
         }
 
         private static void StartServices()
-        {
-            _apiService = new TwitterApiService(_bearerToken);
-        }
+            => _apiService = new TwitterApiService(_bearerToken);
     }
 }

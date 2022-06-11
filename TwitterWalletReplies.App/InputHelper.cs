@@ -9,21 +9,21 @@ namespace TwitterWalletReplies.App
 {
     internal static class InputHelper
     {
-        internal static long GetTwitId(string[] args)
+        internal static long GetTweetId(string[] args)
         {
-            long twitId;
+            long TweetId;
 
             if (args.Length < 1)
             {
-                throw new ArgumentException("TwitId is mandatory");
+                throw new ArgumentException("TweetId is mandatory");
             }
 
-            if (!long.TryParse(args[0], out twitId))
+            if (!long.TryParse(args[0], out TweetId))
             {
-                throw new ArgumentException("Invalid format for TwitId");
+                throw new ArgumentException("Invalid format for TweetId");
             }
 
-            return twitId;
+            return TweetId;
         }
 
         internal static string GetConfig(IConfigurationRoot config, string key, bool isMandatory)
