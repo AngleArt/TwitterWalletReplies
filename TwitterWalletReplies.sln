@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitterWalletReplies.App", "TwitterWalletReplies.App\TwitterWalletReplies.App.csproj", "{B821099A-0409-4CAE-A0DA-BC7B88F093D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterWalletReplies.Domain", "TwitterWalletReplies.Domain\TwitterWalletReplies.Domain.csproj", "{1D8DB80C-CBD7-4920-9C0B-397176D0C56C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B821099A-0409-4CAE-A0DA-BC7B88F093D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B821099A-0409-4CAE-A0DA-BC7B88F093D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B821099A-0409-4CAE-A0DA-BC7B88F093D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B821099A-0409-4CAE-A0DA-BC7B88F093D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D8DB80C-CBD7-4920-9C0B-397176D0C56C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8DB80C-CBD7-4920-9C0B-397176D0C56C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8DB80C-CBD7-4920-9C0B-397176D0C56C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D8DB80C-CBD7-4920-9C0B-397176D0C56C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A299A58D-69F4-4245-A735-FAB16F8A13B9}
+	EndGlobalSection
+EndGlobal
