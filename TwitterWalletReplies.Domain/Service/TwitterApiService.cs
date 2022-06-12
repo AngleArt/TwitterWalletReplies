@@ -14,10 +14,20 @@ namespace TwitterWalletReplies.Domain
 
         public async Task<IEnumerable<Tweet>> GetReplies(long tweetId)
         {
+            dynamic repliesData;
+            string nextToken = "";
+            List<Tweet> tweetReplies = new List<Tweet>();
+
             var originalTweet = await GetTweetData(tweetId);
             var conversationId = GetConversationId(originalTweet);
-            var repliesData = await GetConversationReplies(conversationId);
-            var tweetReplies = GetReplyTweets(repliesData.data, repliesData.includes.users);
+
+            do
+            {
+                repliesData = await GetConversationReplies(conversationId, nextToken);
+                nextToken = repliesData.meta?.next_token?.Value;
+
+                tweetReplies.AddRange(GetReplyTweets(repliesData.data, repliesData.includes.users));
+            } while (!String.IsNullOrEmpty(nextToken));
 
             return tweetReplies;
         }
@@ -81,9 +91,14 @@ namespace TwitterWalletReplies.Domain
             return originalTweet.data[0].conversation_id;
         }
 
-        private async Task<dynamic> GetConversationReplies(long conversationId)
+        private async Task<dynamic> GetConversationReplies(long conversationId, string nextToken = "")
         {
-            var url = $"https://api.twitter.com/2/tweets/search/recent?query=conversation_id:{conversationId}&tweet.fields=in_reply_to_user_id,author_id,created_at,conversation_id&expansions=author_id";
+            var url = $"https://api.twitter.com/2/tweets/search/recent?query=in_reply_to_status_id:{conversationId}&tweet.fields=in_reply_to_user_id,author_id,created_at,conversation_id&expansions=author_id&max_results=100";
+
+            if (!String.IsNullOrEmpty(nextToken))
+            {
+                url += $"&next_token={nextToken}";
+            }
             
             return await ExecuteRequest(url, HttpMethod.Get);
         }
