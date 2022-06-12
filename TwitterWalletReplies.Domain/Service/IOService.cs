@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TwitterWalletReplies.Domain
 {
-    public class IOService : IIOService
+    public class IOService
     {
-        public void SaveAddresses()
+        public static void SaveAddresses(IEnumerable<Tweet> tweets)
         {
             throw new NotImplementedException();
         }

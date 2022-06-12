@@ -9,16 +9,20 @@ namespace TwitterWalletReplies.App
         private static ITwitterApiService _apiService;
         private static string _bearerToken;
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             try
             {
-                long TweetId = InputHelper.GetTweetId(args);
+                long tweetId = InputHelper.GetTweetId(args);
 
                 StartConfig();
                 StartServices();
 
-                Console.WriteLine($"Press enter to process the replies for '{TweetId}'...");
+                Console.WriteLine($"Processing the replies for '{tweetId}'...");
+                var replies = await _apiService.GetReplies(tweetId);
+
+                //Console.WriteLine("Saving addresses...");
+                //IOService.SaveAddresses(replies);
             }
             catch (ArgumentException ex)
             {
@@ -30,7 +34,7 @@ namespace TwitterWalletReplies.App
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Unknown issue found, please contact AngleArt.\nError: {ex.Message}\nSource: {ex.Source}\nInner ex: {ex.InnerException}");
+                Console.WriteLine($"Unknown issue found, please contact AngleArt.\n\nError: {ex.Message}\n\nSource: {ex.Source}");
             }
             finally
             {

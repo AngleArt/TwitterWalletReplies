@@ -28,7 +28,7 @@ namespace TwitterWalletReplies.App
 
         internal static string GetConfig(IConfigurationRoot config, string key, bool isMandatory)
             => isMandatory
-                ? config.GetRequiredSection(key).ToString()
-                : config.GetSection(key).ToString();
+                ? config.GetRequiredSection(key).Value.ToString()
+                : config.GetSection(key)?.Value.ToString();
     }
 }
