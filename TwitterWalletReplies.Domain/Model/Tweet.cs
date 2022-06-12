@@ -18,7 +18,7 @@ namespace TwitterWalletReplies.Domain
         {
             string rgPattern = @"([a-zA-Z0-9_-]+(\.loopring)?(\.eth+))|(0x[a-fA-F0-9]{40})";
 
-            Regex rg = new Regex(rgPattern);
+            Regex rg = new Regex(rgPattern, RegexOptions.IgnoreCase);
             MatchCollection matches = rg.Matches(this.Text);
 
             if (matches.Count() > 0)
