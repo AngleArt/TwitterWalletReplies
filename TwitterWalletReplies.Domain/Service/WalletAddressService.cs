@@ -1,28 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TwitterWalletReplies.Domain
+﻿namespace TwitterWalletReplies.Domain
 {
     public class WalletAddressService : IWalletAddressService
     {
-        public IEnumerable<string> GetTweetAddresses(List<Tweet> tweets)
-            => GetNonUniqueAddresses(tweets)
-                .Distinct();
-
-        private IEnumerable<string> GetNonUniqueAddresses(List<Tweet> tweets)
+        public IEnumerable<Tweet> GetTweetAddresses(IEnumerable<Tweet> tweets)
         {
             foreach (var item in tweets)
             {
-                var address = item.ScrapeWalletAddress();
-
-                if (!String.IsNullOrEmpty(address))
-                {
-                    yield return address;
-                }
+                item.ScrapeWalletAddress();
             }
+
+            return tweets
+                .Where(t => !String.IsNullOrEmpty(t.Address))
+                .DistinctBy(t => t.Address);
         }
     }
 }

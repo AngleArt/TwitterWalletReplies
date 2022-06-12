@@ -6,6 +6,7 @@ namespace TwitterWalletReplies.Domain
     {
         public string Username { get; }
         public string Text { get; }
+        public string Address { get; set; }
 
         public Tweet(string username, string text)
         {
@@ -22,6 +23,7 @@ namespace TwitterWalletReplies.Domain
 
             if (matches.Count() > 0)
             {
+                this.Address = matches[0].Value;
                 return matches[0].Value;
             }
 

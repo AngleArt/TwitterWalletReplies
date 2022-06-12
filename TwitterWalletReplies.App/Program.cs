@@ -7,7 +7,9 @@ namespace TwitterWalletReplies.App
     {
         private static IConfigurationRoot _config;
         private static ITwitterApiService _apiService;
+        private static IWalletAddressService _walletAddressService;
         private static string _bearerToken;
+        private static bool _saveUsernames = false;
 
         static async Task Main(string[] args)
         {
@@ -20,9 +22,12 @@ namespace TwitterWalletReplies.App
 
                 Console.WriteLine($"Processing the replies for '{tweetId}'...");
                 var replies = await _apiService.GetReplies(tweetId);
+                replies = _walletAddressService.GetTweetAddresses(replies);
 
-                //Console.WriteLine("Saving addresses...");
-                //IOService.SaveAddresses(replies);
+                Console.WriteLine("Saving addresses...");
+                var outPath = IOService.SaveAddresses(replies, _saveUsernames);
+
+                Console.WriteLine($"Addresses saved on {outPath}!");
             }
             catch (ArgumentException ex)
             {
@@ -52,9 +57,13 @@ namespace TwitterWalletReplies.App
 
             // Set values
             _bearerToken = InputHelper.GetConfig(_config, "TwitterBearerToken", true);
+            _saveUsernames = bool.Parse(InputHelper.GetConfig(_config, "SaveUsernames", false));
         }
 
         private static void StartServices()
-            => _apiService = new TwitterApiService(_bearerToken);
+        {
+            _apiService = new TwitterApiService(_bearerToken);
+            _walletAddressService = new WalletAddressService();
+        } 
     }
 }

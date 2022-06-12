@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TwitterWalletReplies.Domain
+﻿namespace TwitterWalletReplies.Domain
 {
     public interface IWalletAddressService
     {
-        public IEnumerable<string> GetTweetAddresses(List<Tweet> tweets);
+        public IEnumerable<Tweet> GetTweetAddresses(IEnumerable<Tweet> tweets);
     }
 }
