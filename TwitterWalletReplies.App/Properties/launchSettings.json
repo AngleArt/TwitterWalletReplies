@@ -1,7 +1,8 @@
 {
   "profiles": {
     "TwitterWalletReplies.App": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "{{twitter_status_id_here}}"
     }
   }
 }
